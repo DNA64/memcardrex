@@ -43,24 +43,35 @@ MemcardRex supports communication with the real Memory Cards via external device
 
 <details>
 <summary>1. DexDrive</summary>
-Original way of transferring data from MemoryCard to PC and vice versa albeit a little quirky.
+<br>Original way of transferring data from MemoryCard to PC and vice versa albeit a little quirky.
 <br>If you encounter problems, unplug power from DexDrive, unplug it from COM port and connect it all again.
 
 It is recommended that a power cord is connected to DexDrive, otherwise some cards won't be detected.
 <br>Works with native COM port or USB based adapters.
+
+**Linux users** using a USB <-> Serial Adapter may have issues with the DexDrive not detecting due to a conflict between product IDs (a Braille screen reader called 'brltty' and CH340 based adapters). 
+<br>You can either run: `sudo apt remove brltty`
+<br>or edit /usr/lib/udev/rules.d/85-brltty.rules
+
+ and comment out the line: 
+
+    ENV{PRODUCT}=="1a86/7523/*", ENV{BRLTTY_BRAILLE_DRIVER}="bm", GOTO="brltty_usb_run"
+
+<br>Reboot to complete the process. If you're not sure what COM port the DexDrive is on open a terminal window and with the DexDrive disconnected type: `dmesg | grep tty` then re-connect the DexDrive and type in the previous command again (`dmesg | grep tty`). You should see a ch341 uart adapter on ttyUSB0 or similar.
 </details>
 </summary>
 
 <details>
 <summary>2. MemCARDuino</summary>
-MemCARDuino is an open source Memory Card communication software for various Arduino boards.
+<br>MemCARDuino is an open source Memory Card communication software for various Arduino boards.
 https://github.com/ShendoXT/memcarduino
 </details>
 </summary>
 
 <details>
+<br>
 <summary>3. PS1CardLink</summary>
-PS1CardLink is a software for the actual PlayStation and PSOne consoles.
+<br>PS1CardLink is a software for the actual PlayStation and PSOne consoles.
 <br>It requires an official or home made TTL serial cable for communication with PC.
 
 With it your console becomes a Memory Card reader similar to the DexDrive and MemCARDuino.
@@ -73,7 +84,7 @@ MemcardRex can also talk to the serial port remotely by using a Serial Port Brid
 
 <details>
 <summary>4. Unirom</summary>
-Unirom is a shell for the PlayStation and PSOne consoles.
+<br>Unirom is a shell for the PlayStation and PSOne consoles.
 <br>It requires an official or home made TTL serial cable for communication with PC.
 <br>https://unirom.github.io.
 </details>
@@ -81,7 +92,7 @@ Unirom is a shell for the PlayStation and PSOne consoles.
 
 <details>
 <summary>5. PS3 Memory Card Adaptor</summary>
-The PS3 Memory Card Adaptor is an official Sony USB adapter that allows reading and writing PS1 Memory Cards on a PlayStation 3.
+<br>The PS3 Memory Card Adaptor is an official Sony USB adapter that allows reading and writing PS1 Memory Cards on a PlayStation 3.
 <br>To use it on a Windows PC, a custom USB driver needs to be installed.
  
 This USB driver can be easily created and installed using [Zadig](https://zadig.akeo.ie) by following these steps:
@@ -104,3 +115,4 @@ With the USB driver installed and the PS3 Memory Card Adaptor plugged in, you sh
 
 **Thanks to:**
 <br>@ruantec, Cobalt, TheCloudOfSmoke, RedawgTS, Hard core Rikki, RainMotorsports, Zieg, Bobbi, OuTman, Kevstah2004,  Kubusleonidas, Frédéric Brière, Mark James, Cor'e and DeadlySystem.
+
