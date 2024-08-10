@@ -50,13 +50,19 @@ It is recommended that a power cord is connected to DexDrive, otherwise some car
 <br>Works with native COM port or USB based adapters.
 
 **Linux users** using a USB <-> Serial Adapter may have issues with the DexDrive not detecting due to a conflict between product IDs (a Braille screen reader called 'brltty' and CH340 based adapters). 
-<br>You can either run: `sudo apt remove brltty`
-<br>or edit /usr/lib/udev/rules.d/85-brltty.rules
+<br>
+<br>You can either run: `sudo apt remove brltty` to completely remove the conflicting files.
+<br>
+<br>or you can edit the assosiated rules here: `/usr/lib/udev/rules.d/85-brltty.rules`
 
- and comment out the line: 
+ and comment out the following line: 
 
     ENV{PRODUCT}=="1a86/7523/*", ENV{BRLTTY_BRAILLE_DRIVER}="bm", GOTO="brltty_usb_run"
 
+Example: 
+
+    //    ENV{PRODUCT}=="1a86/7523/*", ENV{BRLTTY_BRAILLE_DRIVER}="bm", GOTO="brltty_usb_run"
+    
 <br>Reboot to complete the process. If you're not sure what COM port the DexDrive is on open a terminal window and with the DexDrive disconnected type: `dmesg | grep tty` then re-connect the DexDrive and type in the previous command again (`dmesg | grep tty`). You should see a ch341 uart adapter on ttyUSB0 or similar.
 </details>
 </summary>
